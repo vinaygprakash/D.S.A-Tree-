@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int>answer;
+    void search(TreeNode*root)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        answer.push_back(root->val);
+        search(root->left);
+        search(root->right);
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        search(root);
+        return answer;
+        
+    }
+};
