@@ -1,0 +1,33 @@
+class Solution {
+
+
+  public:
+       int height(Node*root)
+    {
+        if(root==NULL)
+        {
+            return 0;
+        }
+        int x=height(root->left);
+        int y=height(root->right);
+        int ans=max(x,y)+1;//here 1 is added for this question
+        return ans;     
+
+    }
+    //for above function time complexity is O(n).
+    // Function to return the diameter of a Binary Tree.
+    int diameter(Node* root) 
+    {
+      if(root==NULL)
+        {
+            return 0;
+        }
+        int op1=diameter(root->left);
+        int op2=diameter(root->right);
+        int op3=height(root->left)+height(root->right)+1;//for this time coplexity is O(N) so overal time complexity is O(N square).
+        //here 1 must be add to add root node
+        //if any confuse make grph and solve it.....
+        int ans=max(op1,max(op2,op3));
+        return ans;
+    }
+};
