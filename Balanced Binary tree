@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int height(TreeNode*root)
+    {
+        if(root==NULL)
+        {
+            return 0;
+        }
+        int x=height(root->left);
+        int y=height(root->right);
+        int z=max(x,y)+1;
+        return z;
+    }
+    bool isBalanced(TreeNode* root) {
+        if(root==NULL)
+        {
+            return true;
+        }
+        bool left=isBalanced(root->left);
+        bool right=isBalanced(root->right);
+        bool diff=abs((height(root->left))-height(root->right))<=1;
+        if(left && right && diff)
+        {
+            return 1;
+        }
+        else
+        return false;
+
+
+
+    }
+};
