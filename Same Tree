@@ -25,4 +25,4 @@ public:
         
     }
 };
-                                                             // This also cover the tree having single Node
+                                                             // This also cover the tree having single Node.
