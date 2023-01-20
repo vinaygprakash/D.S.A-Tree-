@@ -13,8 +13,8 @@ public:
         {
             return false;
         }
-        bool left=isSameTree(p->left , q->left);
-        bool right=isSameTree(p->right , q->right);
+        bool left=isSameTree(p->left , q->left);             // here function is calling so write before(....) to isSameTree.
+        bool right=isSameTree(p->right , q->right);          // here it must be , not && as simulatneouly calling both function
         bool value=(p->val==q->val);
         if(left && right && value)
         {
@@ -25,3 +25,4 @@ public:
         
     }
 };
+                                                             // This also cover the tree having single Node
