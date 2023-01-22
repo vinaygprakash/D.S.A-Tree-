@@ -1,0 +1,61 @@
+class Solution {
+public:
+
+    void traverseleft(Node*root,vector<int> &ans) // is unction me hum 1st root ke data ko print ny hota hai....it start from left
+                                                    //so main function me root->data ko print kar rhe hai....
+    {
+        if((root==NULL) || (root->left==NULL && root->right==NULL))
+             return;
+       ans.push_back(root->data);
+       if(root->left!=NULL)
+          traverseleft(root->left,ans); // here ans must be paased
+       else
+          traverseleft(root->right,ans);
+        
+    }
+    void traverseboundary(Node*root,vector<int> &ans)
+    {
+        if(root==NULL)
+         return;
+        if(root->left==NULL && root->right==NULL)
+        {
+            ans.push_back(root->data);
+        }
+        traverseboundary(root->left,ans);
+        traverseboundary(root->right,ans);
+        
+        
+        
+        
+    }
+    void traverseright(Node*root,vector<int> &ans)
+    {
+       if((root==NULL) || (root->left==NULL && root->right==NULL))
+       return;
+       
+       if(root->right!=NULL)
+              traverseright(root->right,ans);
+       else                                         // if phir se ny lagega as boundary travel krna hai...
+                                                    // else(root->right) aisa ny hota......
+                                                    //else ke sath kuch v mat likho.....
+              traverseright(root->left,ans);        // yha pe v same fucntion hi call hoga....as flow flow me left wala mat call krna...function right ka hai...uske andar left pass kar sakte hai..
+       
+       ans.push_back(root->data);
+        
+    }
+    vector <int> boundary(Node *root)
+    {
+        vector<int> ans;
+        if(root==NULL)
+        return ans;  
+        //here return must be ans as we have delacred vector...it is not only return
+        ans.push_back(root->data);   // here it is necessaary as root->data ko print ya store kro..
+        traverseleft(root->left,ans);
+        traverseboundary(root->left,ans);
+        traverseboundary(root->right,ans);
+        traverseright(root->right,ans);
+        
+        
+        return ans;
+    }
+};
