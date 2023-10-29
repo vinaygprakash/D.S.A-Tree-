@@ -1,0 +1,45 @@
+class Solution
+{
+    public:
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    vector<int> topView(Node *root)
+    {
+         // It can be done by Level order travesral
+    vector<int> v;
+    if (root == NULL) {
+      return v;
+    }
+    map<int ,int> topnode; // as hd distance ke corresponding koi vlaue hogi..
+    queue<pair<Node*,int>> q;
+    q.push(make_pair(root,0)); // As initially root dalte hai and distance 0 hota h
+
+    while(!q.empty()){
+        pair<Node*,int> temp=q.front(); // As we push pair in front of q..
+        q.pop();
+
+        //Node* frontnode=temp.first();
+        //int hd=temp.second();
+         Node* frontnode=temp.first;
+        int hd=temp.second;
+        // Hum map me check krenge
+
+        if(topnode.find(hd)==topnode.end()){ // mtlb nhi mila
+            topnode[hd]=frontnode->data; // topnode ke hd me data dal diye
+
+        }
+        if(frontnode->left){
+            q.push(make_pair(frontnode->left,hd-1));
+        }
+        if (frontnode->right) {
+            q.push(make_pair(frontnode->right, hd + 1));
+        }
+    }
+    for(auto i:topnode ){
+        //v.push_back(topnode.second);
+         v.push_back(i.second);
+    }
+    return v;
+    }
+
+};
