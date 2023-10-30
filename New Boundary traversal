@@ -1,0 +1,92 @@
+/************************************************************
+
+    Following is the Binary Tree node structure:
+
+    template <typename T>
+    class TreeNode
+    {
+    public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data)
+        {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+
+        ~TreeNode()
+        {
+            if(left)
+                delete left;
+            if(right)
+                delete right;
+        }
+    };
+
+************************************************************/
+vector<int> leftboundary(TreeNode<int> *root,vector<int> &ans1){
+   // vector<int> ans1;
+    if(root==NULL)
+        return ans1;
+    if(root->left==NULL && root->right==NULL){
+        return ans1; //As hame boundary wala node nhi print krna hai..
+    }
+     ans1.push_back(root->data);
+    if(root->left){
+        leftboundary(root->left,ans1);
+      //  ans1.push_back(root->data);
+    }else{
+        leftboundary(root->right,ans1);
+       // ans1.push_back(root->data);
+    }
+    return ans1;
+
+}
+vector<int> boundary(TreeNode<int> *root,vector<int> &ans2){
+       // vector<int> ans2;
+        if(root==NULL)
+            return ans2;
+        if(root->left==NULL && root->right==NULL){
+            ans2.push_back(root->data);
+            return ans2;
+        }
+        boundary(root->left,ans2);
+        boundary(root->right,ans2);
+        return ans2;
+
+}
+vector<int> rightboundary(TreeNode<int> *root,vector<int> &ans3){
+    //vector<int> ans3;
+    if(root==NULL)
+        return ans3;
+    if(root->left==NULL && root->right==NULL){
+        return ans3; //As hame boundary wala node nhi print krna hai..
+    }
+    if(root->right){
+        rightboundary(root->right,ans3);
+        //ans.push_back(root->data);
+    }else{
+        rightboundary(root->left,ans3);
+        //ans.push_back(root->data);
+    }
+     ans3.push_back(root->data); // As hame aate waqt print krna hai..
+    return ans3;
+
+}
+vector<int> traverseBoundary(TreeNode<int> *root)
+{
+    vector<int> v;
+    if (root == NULL) {
+        return v;
+    }
+    v.push_back(root->data); // First root ko push kro
+    leftboundary(root->left,v);    // Ye root ke left me check krega..mtlb main root
+    boundary(root,v); // v=.... as hame update krna hai..otherwise pass by
+                        // reference kr dete main function me
+    rightboundary(root->right,v);
+
+    return v;
+}
